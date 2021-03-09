@@ -14,6 +14,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         navigationController?.navigationBar.prefersLargeTitles = true
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Recommend App", style: .plain, target: self, action: .none)
         title = "Storm Viewer"
         let fm = FileManager.default // FileManager.default. This is a data type that lets us work with the filesystem
         let path = Bundle.main.resourcePath!
