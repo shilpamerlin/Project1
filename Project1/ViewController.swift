@@ -16,18 +16,23 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Recommend App", style: .plain, target: self, action: .none)
         title = "Storm Viewer"
+        
+        DispatchQueue.global(qos: .userInitiated).async {
         let fm = FileManager.default // FileManager.default. This is a data type that lets us work with the filesystem
         let path = Bundle.main.resourcePath!
         let items = try! fm.contentsOfDirectory(atPath: path)
         
         for item in items {
             if item.hasPrefix("nssl"){
-                pictures.append(item)
+                self.pictures.append(item)
             }
         }
-        pictures = pictures.sorted()
+            self.pictures = self.pictures.sorted()
        
-        
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
